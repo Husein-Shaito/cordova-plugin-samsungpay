@@ -294,9 +294,9 @@ class SamsungPayPlugin : CordovaPlugin() {
         val samsungPay = SamsungPay(this.cordova.context, pInfo)
         samsungPay.getWalletInfo(keys, statusListener)
     }
-private fun requestPayment(callbackContext: CallbackContext, paymentInfo: String) {
-    sendSuccessResult(callbackContext, paymentInfo)
-}
+    private fun requestPayment(callbackContext: CallbackContext, paymentInfo: String) {
+        sendSuccessResult(callbackContext, paymentInfo)
+    }
     private fun prepareAddCardToWallet(
         callbackContext: CallbackContext,
         payloadEncrypted: String
