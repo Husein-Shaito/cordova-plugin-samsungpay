@@ -110,7 +110,7 @@ class SamsungPayPlugin : CordovaPlugin() {
             }
             return true
         }
-        
+
         if (action == GET_ALL_CARDS) {
             this.requestGetAllCards(callbackContext)
             return true
@@ -310,10 +310,29 @@ private fun requestPayment(callbackContext: CallbackContext, paymentInfo: String
 
     samsungPay.startInAppPayment(paymentBundle, object : StatusListener {
         override fun onSuccess(status: Int, bundle: Bundle) {
-            val result = JSONObject().apply {
-                put("message", "Payment initiated successfully.")
-                put("success", true)
+            val billingAddress = JSONObject().apply {
+                put("addressLine1", bundle.getString("billing_address_line1"))
+                put("city", bundle.getString("billing_city"))
+                put("countryCode", bundle.getString("billing_country_code"))
+                put("postalCode", bundle.getString("billing_postal_code"))
             }
+
+            val threeDS = JSONObject().apply {
+                put("authenticationStatus", bundle.getString("3ds_auth_status"))
+                put("eci", bundle.getString("3ds_eci"))
+                put("cavv", bundle.getString("3ds_cavv"))
+            }
+
+            val result = JSONObject().apply {
+                put("success", true)
+                put("billingAddress", billingAddress)
+                put("cardLast4Digits", bundle.getString("card_last4"))
+                put("threeDSecureInfo", threeDS)
+                put("merchantReference", bundle.getString("merchant_reference"))
+                put("paymentMethod", "SamsungPay")
+                put("recurringPayment", bundle.getBoolean("recurring_payment"))
+            }
+
             sendSuccessResult(callbackContext, result)
         }
 
