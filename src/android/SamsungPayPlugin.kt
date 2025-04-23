@@ -232,7 +232,12 @@ class SamsungPayPlugin : CordovaPlugin() {
             }
             sendErrorResult(callbackContext, result)
         } else {
-            requestPayment(callbackContext, cardInfo)
+            val result = JSONObject().apply {
+                put("message", SamsungPayErrors.ADD_CARD_ERROR_INIT.message)
+                put("success", false)
+            }
+            sendErrorResult(callbackContext, result)
+           // requestPayment(callbackContext, cardInfo)
             //prepareAddCardToWallet(callbackContext, cardInfo)
         }
     }
@@ -269,7 +274,7 @@ class SamsungPayPlugin : CordovaPlugin() {
                     put("method", bundle.getString("payment_method"))
                     put("recurring_payment", bundle.getBoolean("recurring_payment", false))
                 }
-            
+
                 sendSuccessResult(callbackContext, result)
             }
             override fun onFail(errorCode: Int, bundle: Bundle?) {
