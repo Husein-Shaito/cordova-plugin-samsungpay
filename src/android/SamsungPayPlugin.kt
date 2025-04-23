@@ -21,7 +21,9 @@ import org.apache.cordova.CordovaWebView
 import org.apache.cordova.PluginResult
 import org.json.JSONArray
 import org.json.JSONObject
-
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentInfo
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentListener
 
 private const val TAG = "SamsungPayPlugin"
 private const val CHECK_DEVICE_SUPPORT = "checkDeviceSupport"
