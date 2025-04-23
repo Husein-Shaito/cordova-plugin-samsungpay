@@ -38,7 +38,7 @@
         <!-- END SDK Files -->
          
         <!-- Gradle -->
-        <source-file src="src/android/libs/samsungpay_2.22.00.jar" target-dir="libs" />
+        <source-file src="src/android/libs/SamsungPaySDK_2.18.00_release.jar" target-dir="libs" />
         <!-- <resource-file src="src/android/libs/SamsungPaySDK_2.18.00_release.jar" target="libs/SamsungPaySDK_2.18.00_release.jar" />-->
         <!-- END Gradle -->
 
@@ -62,7 +62,7 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <meta-data
                 android:name="spay_sdk_api_level"
-                android:value="2.22" />
+                android:value="2.18" />
 
             <meta-data
                 android:name="debug_mode"
