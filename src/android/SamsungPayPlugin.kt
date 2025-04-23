@@ -232,51 +232,31 @@ class SamsungPayPlugin : CordovaPlugin() {
             }
             sendErrorResult(callbackContext, result)
         } else {
-            val result = JSONObject().apply {
-                put("message", SamsungPayErrors.ADD_CARD_ERROR_INIT.message)
-                put("success", false)
-            }
-            sendErrorResult(callbackContext, result)
-           // requestPayment(callbackContext, cardInfo)
-            //prepareAddCardToWallet(callbackContext, cardInfo)
+            prepareAddCardToWallet(callbackContext, cardInfo)
         }
     }
     private fun requestPayment(callbackContext: CallbackContext, paymentInfo: String) {
         val paymentBundle = Bundle().apply {
             putString("paymentInfo", paymentInfo) // You’ll need to populate this with real values
         }
-
+    
         // Example: Assuming there's a SamsungPay API to handle payments (replace with actual call)
         val partnerInfo = PartnerInfo(serviceId, Bundle().apply {
             putString(SamsungPay.EXTRA_ISSUER_NAME, appIssuerName)
             putString(SamsungPay.PARTNER_SERVICE_TYPE, appServiceType)
         })
-
+    
         val samsungPay = SamsungPay(this.cordova.context, partnerInfo)
-
+    
         samsungPay.startInAppPayment(paymentBundle, object : StatusListener {
             override fun onSuccess(status: Int, bundle: Bundle) {
                 val result = JSONObject().apply {
-                    put("billing_address", JSONObject().apply {
-                        put("city", bundle.getString("billing_city"))
-                        put("country", bundle.getString("billing_country"))
-                        put("state_province", bundle.getString("billing_state"))
-                        put("street", bundle.getString("billing_street"))
-                        put("zip_postal_code", bundle.getString("billing_zip"))
-                    })
-                    put("card_last4digits", bundle.getString("card_last4"))
-                    put("3DS", JSONObject().apply {
-                        put("data", bundle.getString("3ds_data"))
-                        put("type", bundle.getString("3ds_type"))
-                        put("version", bundle.getString("3ds_version"))
-                    })
-                    put("merchant_ref", bundle.getString("merchant_ref"))
-                    put("method", bundle.getString("payment_method"))
-                    put("recurring_payment", bundle.getBoolean("recurring_payment", false))
+                    put("message", "Payment initiated successfully.")
+                    put("success", true)
                 }
-
                 sendSuccessResult(callbackContext, result)
             }
+    
             override fun onFail(errorCode: Int, bundle: Bundle?) {
                 val message = bundle?.getString(SpaySdk.EXTRA_ERROR_REASON_MESSAGE) ?: "Payment failed"
                 val result = JSONObject().apply {
