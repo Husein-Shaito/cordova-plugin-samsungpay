@@ -16,7 +16,5 @@ exports.addCard = function (success, error, args) {
     exec(success, error, 'SamsungPayPlugin', 'addCard', [args]);
 };
 
-exports.requestPayment = function (success, error, paymentInfo) {
-    exec(success, error, 'SamsungPayPlugin', 'requestPayment', [paymentInfo]);
-};
+
 
