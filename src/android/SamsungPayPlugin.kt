@@ -21,16 +21,13 @@ import org.apache.cordova.CordovaWebView
 import org.apache.cordova.PluginResult
 import org.json.JSONArray
 import org.json.JSONObject
-import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
-import com.samsung.android.sdk.samsungpay.v2.payment.PaymentInfo
-import com.samsung.android.sdk.samsungpay.v2.payment.PaymentListener
+
 
 private const val TAG = "SamsungPayPlugin"
 private const val CHECK_DEVICE_SUPPORT = "checkDeviceSupport"
 private const val GET_WALLET_INFO = "getWalletInfo"
 private const val GET_ALL_CARDS = "getAllCards"
 private const val ADD_CARD = "addCard"
-private const val REQUEST_PAYMENT = "requestPayment"
 
 class SamsungPayPlugin : CordovaPlugin() {
 
@@ -101,8 +98,6 @@ class SamsungPayPlugin : CordovaPlugin() {
             this.requestGetWalletInfo(callbackContext)
             return true
         }
-
-
 
         if (action == GET_ALL_CARDS) {
             this.requestGetAllCards(callbackContext)
@@ -287,8 +282,6 @@ class SamsungPayPlugin : CordovaPlugin() {
         val samsungPay = SamsungPay(this.cordova.context, pInfo)
         samsungPay.getWalletInfo(keys, statusListener)
     }
-
-
 
     private fun prepareAddCardToWallet(
         callbackContext: CallbackContext,
