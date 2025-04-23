@@ -1,12 +1,12 @@
 allprojects {
-   repositories {
-       google()
-       mavenCentral()
-   }
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repository.samsung.com/nexus/content/repositories/samsungpay' }
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation files('libs/SamsungPaySDK_2.18.00_release.jar')
+    implementation 'com.samsung.android.sdk:samsungpay-sdk:2.18.00'
     implementation 'com.google.code.gson:gson:2.10'
 }
