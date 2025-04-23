@@ -295,17 +295,7 @@ class SamsungPayPlugin : CordovaPlugin() {
         samsungPay.getWalletInfo(keys, statusListener)
     }
 private fun requestPayment(callbackContext: CallbackContext, paymentInfo: String) {
-    val paymentBundle = Bundle().apply {
-        putString("paymentInfo", paymentInfo) // You’ll need to populate this with real values
-    }
-
-    // Example: Assuming there's a SamsungPay API to handle payments (replace with actual call)
-    val partnerInfo = PartnerInfo(serviceId, Bundle().apply {
-        putString(SamsungPay.EXTRA_ISSUER_NAME, appIssuerName)
-        putString(SamsungPay.PARTNER_SERVICE_TYPE, appServiceType)
-    })
     sendSuccessResult(callbackContext, paymentInfo)
-
 }
     private fun prepareAddCardToWallet(
         callbackContext: CallbackContext,
